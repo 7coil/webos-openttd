@@ -61,6 +61,10 @@ if(APPLE OR UNIX)
     add_definitions(-DUNIX)
 endif()
 
+if (WEBOS)
+    add_definitions(-DWEBOS)
+endif()
+
 if(UNIX)
     find_package(Doxygen)
 endif()
