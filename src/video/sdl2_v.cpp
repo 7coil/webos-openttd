@@ -198,8 +198,8 @@ bool VideoDriver_SDL_Base::CreateMainSurface(uint w, uint h, bool resize)
 
 bool VideoDriver_SDL_Base::ClaimMousePointer()
 {
-	/* Emscripten never claims the pointer, so we do not need to change the cursor visibility. */
-#ifndef __EMSCRIPTEN__
+	/* Emscripten and LG WebOS never claims the pointer, so we do not need to change the cursor visibility. */
+#if !defined(__EMSCRIPTEN__) && !defined(WEBOS)
 	SDL_ShowCursor(0);
 #endif
 	return true;

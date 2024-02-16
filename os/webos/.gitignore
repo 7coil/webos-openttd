@@ -1,1 +1,6 @@
 *.ipk
+ai/
+baseset/
+game/
+lang/
+openttd
