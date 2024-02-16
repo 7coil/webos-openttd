@@ -33,3 +33,7 @@ XDG_RUNTIME_DIR=/tmp/xdg /usr/bin/jailer -t native_devmode -i com.leondrolio.x.o
 LD_LIBRARY_PATH=/media/developer/apps/usr/palm/applications/com.leondrolio.x.openttd/lib XDG_RUNTIME_DIR=/tmp/xdg /usr/bin/jailer -t native_devmode -i com.leondrolio.x.openttd -p /media/developer/apps/usr/palm/applications/com.leondrolio.x.openttd
  /media/developer/apps/usr/palm/applications/com.leondrolio.x.openttd/openttd
 ```
+
+## Packaging Instructions
+
+`./package.sh` to copy stuff to the webos folder - you should get an ipk out :D
