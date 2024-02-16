@@ -526,7 +526,11 @@ int openttd_main(std::span<char * const> arguments)
 	_switch_mode = SM_MENU;
 
 	auto options = CreateOptions();
-	GetOptData mgo(arguments.subspan(1), options);
+	#ifdef WEBOS
+		GetOptData mgo(arguments.subspan(2), options);
+	#else
+		GetOptData mgo(arguments.subspan(1), options);
+	#endif
 	int ret = 0;
 
 	int i;
