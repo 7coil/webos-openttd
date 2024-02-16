@@ -521,7 +521,11 @@ int openttd_main(std::span<std::string_view> arguments)
 	_switch_mode = SM_MENU;
 
 	auto options = CreateOptions();
-	GetOptData mgo(arguments.subspan(1), options);
+	#ifdef WEBOS
+		GetOptData mgo(arguments.subspan(2), options);
+	#else
+		GetOptData mgo(arguments.subspan(1), options);
+	#endif
 
 	int i;
 	while ((i = mgo.GetOpt()) != -1) {
