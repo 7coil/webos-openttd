@@ -11,9 +11,4 @@ function(set_static_if_needed)
         # Force static linking
         link_libraries(-static -static-libgcc -static-libstdc++)
     endif()
-
-    if(WEBOS)
-        # Force static linking
-        link_libraries(-static-libgcc -static-libstdc++)
-    endif()
 endfunction()
