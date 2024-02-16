@@ -534,7 +534,11 @@ int openttd_main(int argc, char *argv[])
 	_game_mode = GM_MENU;
 	_switch_mode = SM_MENU;
 
-	GetOptData mgo(argc - 1, argv + 1, _options);
+	#ifdef WEBOS
+		GetOptData mgo(argc - 2, argv + 2, _options);
+	#else
+		GetOptData mgo(argc - 1, argv + 1, _options);
+	#endif
 	int ret = 0;
 
 	int i;
