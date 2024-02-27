@@ -1,5 +1,21 @@
 # webos openttd
 
+## Building FluidSynth
+
+> Do these in a different folder, outside of the OpenTTD folder.
+
+```sh
+git clone https://github.com/FluidSynth/fluidsynth
+cd fluidsynth
+mkdir build
+cd build
+cmake .. -DCMAKE_TOOLCHAIN_FILE=/opt/arm-webos-linux-gnueabi_sdk-buildroot/share/buildroot/toolchainfile.cmake -DCMAKE_INSTALL_PREFIX=/opt/arm-webos-linux-gnueabi_sdk-buildroot/arm-webos-linux-gnueabi/sysroot/usr
+make
+make install
+```
+
+## Building OpenTTD
+
 ```sh
 # Build an AMD64 version for your local computer
 mkdir build-native
@@ -21,19 +37,21 @@ cmake .. -DCMAKE_TOOLCHAIN_FILE=/opt/arm-webos-linux-gnueabi_sdk-buildroot/share
 make -j9
 ```
 
+## Packaging OpenTTD
+
+Download either...
+- `FluidR3_GM.sf2` from the ZIP file on this website: https://member.keymusician.com/Member/FluidR3_GM/index.html
+- `TimGM6mb.sf2` from the Debian `timgm6mb-soundfont` repository: https://salsa.debian.org/multimedia-team/timgm6mb-soundfont
+
+Put the file in the `public/` folder.
+
 ```sh
-ares-package .
+./package.sh
+# ares-package .
 ```
+
+## Debugging OpenTTD
 
 ```sh
 XDG_RUNTIME_DIR=/tmp/xdg /usr/bin/jailer -t native_devmode -i com.leondrolio.x.openttd -p /media/developer/apps/usr/palm/applications/com.leondrolio.x.openttd /media/developer/apps/usr/palm/applications/com.leondrolio.x.openttd/openttd '{"@system_native_app":true,"nid":"com.leondrolio.x.openttd"}'
 ```
-
-```sh
-LD_LIBRARY_PATH=/media/developer/apps/usr/palm/applications/com.leondrolio.x.openttd/lib XDG_RUNTIME_DIR=/tmp/xdg /usr/bin/jailer -t native_devmode -i com.leondrolio.x.openttd -p /media/developer/apps/usr/palm/applications/com.leondrolio.x.openttd
- /media/developer/apps/usr/palm/applications/com.leondrolio.x.openttd/openttd
-```
-
-## Packaging Instructions
-
-`./package.sh` to copy stuff to the webos folder - you should get an ipk out :D
