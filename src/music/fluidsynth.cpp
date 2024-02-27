@@ -47,6 +47,10 @@ static const char *default_sf[] = {
 	"/usr/share/sounds/sf2/TimGM6mb.sf2",
 	"/usr/share/sounds/sf2/FluidR3_GS.sf2",
 
+	/* Pre-packaged soundfonts next to OpenTTD */
+	"./TimGM6mb.sf2",
+	"./FluidR3_GM.sf2",
+
 	nullptr
 };
 
