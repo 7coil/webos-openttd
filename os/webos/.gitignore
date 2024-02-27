@@ -1,6 +1,3 @@
 *.ipk
-dist/ai/
-dist/baseset/
-dist/game/
-dist/lang/
-dist/openttd
+*.sf2
+dist/
