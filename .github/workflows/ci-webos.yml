@@ -1,0 +1,86 @@
+name: CI (LG WebOS)
+
+on:
+  workflow_dispatch:
+
+env:
+  CTEST_OUTPUT_ON_FAILURE: 1
+
+jobs:
+  webos:
+    name: CI
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 22
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y --no-install-recommends \
+          build-essential \
+          cmake \
+          # EOF
+
+    - name: Install webOS CLI
+      run: |
+        npm install -g @webosose/ares-cli
+
+    - name: Install webOS toolchain
+      run: |
+        curl -L https://github.com/openlgtv/buildroot-nc4/releases/latest/download/arm-webos-linux-gnueabi_sdk-buildroot.tar.gz -o webos.tar.gz
+        tar -xzf webos.tar.gz -C os/webos
+        rm -f webos.tar.gz
+        cd os/webos/arm-webos-linux-gnueabi_sdk-buildroot
+        ./relocate-sdk.sh
+
+    - name: Install FluidSynth
+      run: |
+        git clone https://github.com/FluidSynth/fluidsynth
+        cd fluidsynth
+        mkdir build
+        cd build
+        cmake .. \
+          -DCMAKE_TOOLCHAIN_FILE="$GITHUB_WORKSPACE/os/webos/arm-webos-linux-gnueabi_sdk-buildroot/share/buildroot/toolchainfile.cmake" \
+          -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/os/webos/arm-webos-linux-gnueabi_sdk-buildroot/arm-webos-linux-gnueabi/sysroot/usr"
+        make
+        make install
+
+    - name: Build native tools
+      run: |
+        mkdir build-native
+        cd build-native
+        cmake .. -DOPTION_TOOLS_ONLY=ON
+        make -j
+
+    - name: Build OpenTTD
+      run: |
+        mkdir build
+        cd build
+
+        cmake .. \
+          -DCMAKE_TOOLCHAIN_FILE="$GITHUB_WORKSPACE/os/webos/arm-webos-linux-gnueabi_sdk-buildroot/share/buildroot/toolchainfile.cmake" \
+          -DHOST_BINARY_DIR="$GITHUB_WORKSPACE/build-native" \
+          -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+          -DWEBOS=ON \
+          -DOPTION_PACKAGE_DEPENDENCIES=ON
+
+        make -j5
+
+    - name: Package OpenTTD
+      run: |
+        cd os/webos
+        chmod +x package.sh
+        TOOLCHAIN_DIRECTORY=$GITHUB_WORKSPACE/os/webos/arm-webos-linux-gnueabi_sdk-buildroot ./package.sh
+        ls
+
+    - name: Upload .ipk
+      uses: actions/upload-artifact@v4
+      with:
+        name: openttd
+        path: os/webos/*.ipk
