@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TOOLCHAIN_DIRECTORY=/opt/arm-webos-linux-gnueabi_sdk-buildroot
+TOOLCHAIN_DIRECTORY="${TOOLCHAIN_DIRECTORY:-"/opt/arm-webos-linux-gnueabi_sdk-buildroot"}"
 
 rm -rf dist/
 mkdir dist/
@@ -20,8 +20,8 @@ cp $TOOLCHAIN_DIRECTORY/arm-webos-linux-gnueabi/sysroot/usr/lib/libicuuc.so.70.1
 ln -rs dist/lib/libicuuc.so.70.1 dist/lib/libicuuc.so.70
 cp $TOOLCHAIN_DIRECTORY/arm-webos-linux-gnueabi/sysroot/usr/lib/libstdc++.so.6.0.30 dist/lib
 ln -rs dist/lib/libstdc++.so.6.0.30 dist/lib/libstdc++.so.6
-cp $TOOLCHAIN_DIRECTORY/arm-webos-linux-gnueabi/sysroot/usr/lib/libfluidsynth.so.3.2.2 dist/lib
-ln -rs dist/lib/libfluidsynth.so.3.2.2 dist/lib/libfluidsynth.so.3
+cp $TOOLCHAIN_DIRECTORY/arm-webos-linux-gnueabi/sysroot/usr/lib/libfluidsynth.so.3.3.3 dist/lib
+ln -rs dist/lib/libfluidsynth.so.3.3.3 dist/lib/libfluidsynth.so.3
 cp $TOOLCHAIN_DIRECTORY/arm-webos-linux-gnueabi/sysroot/usr/lib/libreadline.so.8.1 dist/lib
 ln -rs dist/lib/libreadline.so.8.1 dist/lib/libreadline.so.8
 
