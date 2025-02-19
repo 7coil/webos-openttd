@@ -31,6 +31,23 @@ jobs:
       run: |
         npm install -g @webosose/ares-cli
 
+    - name: Get OpenGFX/OpenSFX/OpenMSX
+      run: |
+        mkdir -p "$GITHUB_WORKSPACE/os/webos/public/baseset"
+        cd "$GITHUB_WORKSPACE/os/webos/public/baseset"
+
+        curl -L https://cdn.openttd.org/opengfx-releases/7.1/opengfx-7.1-all.zip -o opengfx-all.zip
+        unzip opengfx-all.zip
+        rm -f opengfx-all.zip
+
+        curl -L https://cdn.openttd.org/opensfx-releases/1.0.3/opensfx-1.0.3-all.zip -o opensfx-all.zip
+        unzip opensfx-all.zip
+        rm -f opensfx-all.zip
+
+        curl -L https://cdn.openttd.org/openmsx-releases/0.4.2/openmsx-0.4.2-all.zip -o openmsx-all.zip
+        unzip openmsx-all.zip
+        rm -f openmsx-all.zip
+
     - name: Install webOS toolchain
       run: |
         curl -L https://github.com/openlgtv/buildroot-nc4/releases/latest/download/arm-webos-linux-gnueabi_sdk-buildroot.tar.gz -o webos.tar.gz
@@ -38,7 +55,7 @@ jobs:
         rm -f webos.tar.gz
         cd os/webos/arm-webos-linux-gnueabi_sdk-buildroot
         ./relocate-sdk.sh
-
+    
     - name: Install FluidSynth
       run: |
         git clone https://github.com/FluidSynth/fluidsynth
