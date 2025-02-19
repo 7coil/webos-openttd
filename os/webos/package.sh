@@ -9,7 +9,7 @@ cp -r ../../build/baseset dist/baseset
 cp -r ../../build/game dist/game
 cp -r ../../build/lang dist/lang
 cp -r ../../build/openttd dist/openttd
-cp -r public/* dist/
+cp -r public/. dist/
 
 mkdir dist/lib
 cp $TOOLCHAIN_DIRECTORY/arm-webos-linux-gnueabi/sysroot/usr/lib/libicudata.so.70.1 dist/lib
