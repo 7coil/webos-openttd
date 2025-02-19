@@ -94,10 +94,13 @@ jobs:
         cd os/webos
         chmod +x package.sh
         TOOLCHAIN_DIRECTORY=$GITHUB_WORKSPACE/os/webos/arm-webos-linux-gnueabi_sdk-buildroot ./package.sh
+        node scripts/manifest.js
         ls
 
     - name: Upload .ipk
       uses: actions/upload-artifact@v4
       with:
         name: openttd
-        path: os/webos/*.ipk
+        path: |
+          os/webos/*.ipk
+          os/webos/manifest.json
