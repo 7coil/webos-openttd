@@ -24,5 +24,7 @@ cp $TOOLCHAIN_DIRECTORY/arm-webos-linux-gnueabi/sysroot/usr/lib/libfluidsynth.so
 ln -rs dist/lib/libfluidsynth.so.3.3.3 dist/lib/libfluidsynth.so.3
 cp $TOOLCHAIN_DIRECTORY/arm-webos-linux-gnueabi/sysroot/usr/lib/libreadline.so.8.1 dist/lib
 ln -rs dist/lib/libreadline.so.8.1 dist/lib/libreadline.so.8
+cp $TOOLCHAIN_DIRECTORY/arm-webos-linux-gnueabi/sysroot/lib/libatomic.so.1.2.0 dist/lib
+ln -rs dist/lib/libatomic.so.1.2.0 dist/lib/libatomic.so.1
 
 ares-package dist/
