@@ -109,7 +109,12 @@ static uint FindStartupDisplay(uint startup_display)
 
 	/* Mouse position decides which display to use. */
 	int mx, my;
-	SDL_GetGlobalMouseState(&mx, &my);
+	#ifdef WEBOS
+		/* LG WebOS apps are always fullscreen, this increases compat */
+		SDL_GetMouseState(&mx, &my);
+	#else
+		SDL_GetGlobalMouseState(&mx, &my);
+	#endif
 	for (int display = 0; display < num_displays; ++display) {
 		SDL_Rect r;
 		if (SDL_GetDisplayBounds(display, &r) == 0 && IsInsideBS(mx, r.x, r.w) && IsInsideBS(my, r.y, r.h)) {
