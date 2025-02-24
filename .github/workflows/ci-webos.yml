@@ -56,6 +56,18 @@ jobs:
         cd os/webos/arm-webos-linux-gnueabi_sdk-buildroot
         ./relocate-sdk.sh
     
+    - name: Install liblzma
+      run: |
+        git clone https://github.com/tukaani-project/xz.git
+        cd xz
+        mkdir build
+        cd build
+        cmake .. \
+          -DCMAKE_TOOLCHAIN_FILE="$GITHUB_WORKSPACE/os/webos/arm-webos-linux-gnueabi_sdk-buildroot/share/buildroot/toolchainfile.cmake" \
+          -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/os/webos/arm-webos-linux-gnueabi_sdk-buildroot/arm-webos-linux-gnueabi/sysroot/usr"
+        make
+        make install
+
     - name: Install FluidSynth
       run: |
         git clone https://github.com/FluidSynth/fluidsynth
