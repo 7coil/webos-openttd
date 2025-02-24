@@ -226,16 +226,17 @@ if(OPTION_PACKAGE_DEPENDENCIES)
         message(FATAL_ERROR "OPTION_PACKAGE_DEPENDENCIES can only work with CMake 3.16+; you are using ${CMAKE_VERSION}")
     endif()
 
-    if (NOT WEBOS)
-        # If we are packaging dependencies, we do two things:
-        # 1) set the RPATH to include $ORIGIN/lib; $ORIGIN (that literal string)
-        #    is a Linux indicator for "path where application is". In CMake, we
-        #    have to do this before add_executable() is executed.
-        # 2) copy the libraries that we compile against to the "lib" folder.
-        #    This is done in InstallAndPackage.cmake.
-        set(CMAKE_INSTALL_RPATH "\$ORIGIN/lib")
-        set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
-    endif()
+    # If we are packaging dependencies, we do two things:
+    # 1) set the RPATH to include $ORIGIN/lib; $ORIGIN (that literal string)
+    #    is a Linux indicator for "path where application is". In CMake, we
+    #    have to do this before add_executable() is executed.
+    # 2) copy the libraries that we compile against to the "lib" folder.
+    #    This is done in InstallAndPackage.cmake.
+    set(CMAKE_INSTALL_RPATH "\$ORIGIN/lib")
+    set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
+    if (WEBOS)
+        set(CMAKE_INSTALL_RPATH "\$ORIGIN")
+    endif ()
 endif()
 
 include(CTest)
