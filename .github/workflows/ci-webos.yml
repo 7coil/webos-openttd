@@ -83,7 +83,7 @@ jobs:
         cmake .. \
           -DCMAKE_TOOLCHAIN_FILE="$GITHUB_WORKSPACE/os/webos/arm-webos-linux-gnueabi_sdk-buildroot/share/buildroot/toolchainfile.cmake" \
           -DHOST_BINARY_DIR="$GITHUB_WORKSPACE/build-native" \
-          -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+          -DCMAKE_BUILD_TYPE=Release \
           -DWEBOS=ON \
           -DOPTION_PACKAGE_DEPENDENCIES=ON
 
