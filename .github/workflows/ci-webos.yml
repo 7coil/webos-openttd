@@ -38,15 +38,18 @@ jobs:
 
         curl -L https://cdn.openttd.org/opengfx-releases/7.1/opengfx-7.1-all.zip -o opengfx-all.zip
         unzip opengfx-all.zip
-        rm -f opengfx-all.zip
+        tar xf opengfx-*.tar
+        rm -f opengfx-all.zip opengfx-*.tar
 
         curl -L https://cdn.openttd.org/opensfx-releases/1.0.3/opensfx-1.0.3-all.zip -o opensfx-all.zip
         unzip opensfx-all.zip
-        rm -f opensfx-all.zip
+        tar xf opensfx-*.tar
+        rm -f opensfx-all.zip opensfx-*.tar
 
         curl -L https://cdn.openttd.org/openmsx-releases/0.4.2/openmsx-0.4.2-all.zip -o openmsx-all.zip
         unzip openmsx-all.zip
-        rm -f openmsx-all.zip
+        tar xf openmsx-*.tar
+        rm -f openmsx-all.zip openmsx-*.tar
 
     - name: Install webOS toolchain
       run: |
@@ -56,6 +59,18 @@ jobs:
         cd os/webos/arm-webos-linux-gnueabi_sdk-buildroot
         ./relocate-sdk.sh
     
+    - name: Install liblzma
+      run: |
+        git clone https://github.com/tukaani-project/xz.git
+        cd xz
+        mkdir build
+        cd build
+        cmake .. \
+          -DCMAKE_TOOLCHAIN_FILE="$GITHUB_WORKSPACE/os/webos/arm-webos-linux-gnueabi_sdk-buildroot/share/buildroot/toolchainfile.cmake" \
+          -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/os/webos/arm-webos-linux-gnueabi_sdk-buildroot/arm-webos-linux-gnueabi/sysroot/usr"
+        make
+        make install
+
     - name: Install FluidSynth
       run: |
         git clone https://github.com/FluidSynth/fluidsynth
@@ -83,7 +98,7 @@ jobs:
         cmake .. \
           -DCMAKE_TOOLCHAIN_FILE="$GITHUB_WORKSPACE/os/webos/arm-webos-linux-gnueabi_sdk-buildroot/share/buildroot/toolchainfile.cmake" \
           -DHOST_BINARY_DIR="$GITHUB_WORKSPACE/build-native" \
-          -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+          -DCMAKE_BUILD_TYPE=Release \
           -DWEBOS=ON \
           -DOPTION_PACKAGE_DEPENDENCIES=ON
 
