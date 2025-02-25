@@ -63,7 +63,7 @@ const main = async () => {
     iconUri:
       "https://github.com/7coil/webos-openttd/raw/webos/os/webos/public/icon.png",
     sourceUrl: "https://github.com/7coil/webos-openttd",
-    ipkUrl: `https://github.com/7coil/webos-openttd/releases/download/webos-${appinfo.version}/${appfile}`,
+    ipkUrl: appfile,
     ipkHash: {
       sha256: await getSha256(appfile),
     },
