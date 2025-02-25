@@ -1,6 +1,6 @@
 {
   "id": "com.leondrolio.x.openttd",
-  "version": "14.1.2",
+  "version": "0.0.8",
   "vendor": "leondrolio.com",
   "type": "native",
   "main": "openttd",
