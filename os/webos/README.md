@@ -1,5 +1,14 @@
 # webos openttd
 
+## Project Setup
+```sh
+# if you dump it into your opt folder...
+export TOOLCHAIN_DIR=/opt/arm-webos-linux-gnueabi_sdk-buildroot
+
+# if youre a masochist using Mac OS X and you dump it elsewhere...
+export TOOLCHAIN_DIR=/Volumes/Programming/arm-webos-linux-gnueabi_sdk-buildroot
+```
+
 ## Building FluidSynth
 
 > Do these in a different folder, outside of the OpenTTD folder.
@@ -9,7 +18,7 @@ git clone https://github.com/FluidSynth/fluidsynth
 cd fluidsynth
 mkdir build
 cd build
-cmake .. -DCMAKE_TOOLCHAIN_FILE=/opt/arm-webos-linux-gnueabi_sdk-buildroot/share/buildroot/toolchainfile.cmake -DCMAKE_INSTALL_PREFIX=/opt/arm-webos-linux-gnueabi_sdk-buildroot/arm-webos-linux-gnueabi/sysroot/usr
+cmake .. -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_DIR/share/buildroot/toolchainfile.cmake -DCMAKE_INSTALL_PREFIX=$TOOLCHAIN_DIR/arm-webos-linux-gnueabi/sysroot/usr
 make
 make install
 ```
@@ -33,7 +42,7 @@ make -j
 #   Adjust WSL swap space so you have 64GB of pagable memory space
 mkdir build
 cd build
-cmake .. -DCMAKE_TOOLCHAIN_FILE=/opt/arm-webos-linux-gnueabi_sdk-buildroot/share/buildroot/toolchainfile.cmake -DHOST_BINARY_DIR=../build-native -DCMAKE_BUILD_TYPE=RelWithDebInfo -DWEBOS=ON -DOPTION_PACKAGE_DEPENDENCIES=ON
+cmake .. -DCMAKE_TOOLCHAIN_FILE=$TOOLCHAIN_DIR/share/buildroot/toolchainfile.cmake -DHOST_BINARY_DIR=../build-native -DCMAKE_BUILD_TYPE=RelWithDebInfo -DWEBOS=ON -DOPTION_PACKAGE_DEPENDENCIES=ON
 make -j9
 ```
 
