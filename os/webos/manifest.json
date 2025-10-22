@@ -1,15 +1,15 @@
 {
   "id": "com.leondrolio.x.openttd",
-  "version": "0.0.5",
+  "version": "15.0.0",
   "type": "native",
-  "title": "OpenTTD",
+  "title": "OpenTTD 15.0-beta3",
   "appDescription": "Technical Demo for OpenTTD",
   "iconUri": "https://github.com/7coil/webos-openttd/raw/webos/os/webos/public/icon.png",
   "sourceUrl": "https://github.com/7coil/webos-openttd",
-  "ipkUrl": "https://github.com/7coil/webos-openttd/releases/download/webos-0.0.5/com.leondrolio.x.openttd_0.0.5_arm.ipk",
+  "ipkUrl": "com.leondrolio.x.openttd_15.0.0_arm.ipk",
   "ipkHash": {
-    "sha256": "b1004553117e6592c0135e60f40b550e9ddc73cb091d67c6237a08393c8f717a"
+    "sha256": "a57af75c815c88625943de5a0db6a875635eddd8c43d0605f2ae811bfefb259f"
   },
-  "ipkSize": 162018054,
-  "installedSize": 169202034
+  "ipkSize": 174810480,
+  "installedSize": 412041216
 }
